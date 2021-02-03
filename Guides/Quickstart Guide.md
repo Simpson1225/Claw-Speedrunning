@@ -1,6 +1,6 @@
 # Quickstart guide
 
-Speedrunning is a great way to continue playing Claw after you have already played the game normally. This guide will explain how to get set up for speedrunning the game, and record your first run. It also contains tools for more advanced speedruns, such as automatic timers for each level. Everything used here is free and won’t take long to install.
+Speedrunning is a great way to continue playing Claw after you have already played the game normally. This guide will explain how to get set up for speedrunning the game, and record your first run. Everything used here is free and won’t take long to install.
 
  - Install [Claw 1.4.4.4](https://captainclaw.net/dl/CLAW-1.4.4.4.zip) (Other versions may be compatible but haven't been tested)
  - Install [Livesplit](http://livesplit.org/downloads/) - for timing runs
@@ -13,19 +13,21 @@ Speedrunning is a great way to continue playing Claw after you have already play
  
  ## Timing runs
  
- Runs are timed using Livesplit, accurate to 1/100th of a second, so you should always have Livesplit timer running when recording runs. Open Livesplit, right click it and go to settings. Choose hotkeys for start/split and reset. For full game runs, timing starts when you select new game on La Roca, and ends when you touch the last Gem, on the Omar boss fight. For Individual Level (IL) runs, timing starts on the first frame that the screen goes black after the loading screen, and ends when you touch the end of level trigger, or the red boss warp if the level has one.
+ Runs are timed using Livesplit, accurate to 1/100th of a second, so you should always have Livesplit timer running when recording runs. Open Livesplit, right click it and go to settings. Choose hotkeys for start/split and reset. 
  
- The in game timer is not used for timing runs, because it is only accurate to 1 second and pauses in some situations, such as using warps, dying, when the game is paused. It is very helpful to have visible though during runs because you can use it to tell where elevators and ropes etc. will be even before they are on screen. While in a level, type MPSTOPWATCH to toggle the timer. Since you can't type this during a run, you need a hotkey to toggle it for you. With Autohotkey installed, run the `Claw_Speedrun_Hotkeys_Basic.lss` file downloaded above. Press CapsLock while in a level to toggle the timer and FPS. The best time to press this is just before Claw can move, at the start of your run.
+ For full game runs, timing starts when you select new game on La Roca, and ends when you touch the last Gem on the Omar boss fight. For Individual Level (IL) runs, timing starts on the first frame that the screen goes black after the loading screen, and ends when you touch the end of level trigger, or the red boss warp if the level has one.
  
-## FPS
+ The in game timer is not actually used for timing runs, because it is only accurate to 1 second and pauses in some situations, such as using warps, dying, and when the game is paused. It is still very helpful to have it visible during runs, because you can use it to tell where elevators and ropes etc. will be even before they are on screen. While in a level, type MPSTOPWATCH to toggle the timer. Since you can't type this during a run, you need a hotkey to toggle it for you. With Autohotkey installed, run the `Claw_Speedrun_Hotkeys_Basic.lss` file downloaded above, and then press CapsLock while in a level to toggle the timer and FPS. The best time to press this is just before Claw can move, at the start of your run.
+ 
+## Framerate (FPS)
 
-Your Frames per Second (FPS) in Claw can have a big effect on how the game feels to play - while in a level, type MPFPS to view framerate. A framerate of 60FPS is required in order for speedruns to be valid on the leaderboards, although if you are unable to achieve this framerate you can still have fun with more casual speedrunning. Lower framerates can slow movement and cut jumps short, higher framerate will speed up movement but slows down elevators and makes dynamite jumping harder. Since FPS is useful for run verification, the FPS counter is enabled with the in game timer using the CapsLock hotkey from the `Claw_Speedrun_Hotkeys_Basic.lss` file downloaded above.
+Your Frames per Second (FPS) in Claw can have a big effect on how the game feels to play. While in a level, type MPFPS to view framerate. A framerate of 60FPS is required in order for speedruns to be valid on the leaderboards, although if you are unable to achieve this framerate, you can still have fun with more casual speedrunning. Lower framerates can slow movement and cut jumps short, and higher framerate will speed up movement, slows down some elevators, and makes dynamite jumping harder. Since FPS is useful for run verification, the FPS counter is enabled with the in game timer using the CapsLock hotkey from the `Claw_Speedrun_Hotkeys_Basic.lss` file downloaded above.
 
 ## Key bindings
 
 It's worth thinking about key bindings sooner rather than later, since it is hard to change once you are used to a certain layout. The default controls are usable for speedrunning, but it's recommended to have separate buttons for magic claw, pistol and dynamite which are easy to reach, rather than using shift to cycle between them.
 
-Also, you may want to use WASD for movement, although you can't remap the movement keys in the game. You can use autohotkey or similar to do this remapping. Using WASD may be better for right handed players because then jumping (probably the most precise inputs) can be done with the dominant hand.
+Also, you may want to use WASD for movement, although you can't remap the movement keys in the game. You can use autohotkey or similar to do this remapping. Using WASD may be better for right handed players because then jumping (probably the most precise inputs) can be done with the dominant hand, although keeping the original arrow buttons for movement is also fine.
  
 ## Recording a run
 
@@ -54,6 +56,7 @@ If you want to go further with Claw speedrunning, this repository contains more 
 - A set of Claw icons, used in the livesplit splits files
 - A more detailed Autohotkey file that includes hotkeys for some cheat codes that are useful for practicing
 - Instructions on how to use the livesplit and autohotkey files
+- Dynamite jump guide (coming soon...)
 
 For the latest stratgies for each level, you can watch runs on the speedrun leaderboards, see the links below.
 
@@ -62,4 +65,4 @@ For the latest stratgies for each level, you can watch runs on the speedrun lead
 - [Full game speedrun leaderboard](https://www.speedrun.com/claw/full_game)
 - [Individual level records](https://www.speedrun.com/claw/individual_levels)
 - [Guides on speedrun.com](https://www.speedrun.com/claw/guides)
-- [Nohboard](https://sourceforge.net/projects/nohboard/) - An option for recording keyboard inputs if you want
+- [Nohboard](https://sourceforge.net/projects/nohboard/) - An option for recording keyboard inputs if you want, a pain to set up though
