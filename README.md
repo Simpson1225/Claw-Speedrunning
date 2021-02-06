@@ -7,23 +7,6 @@ This repo contains tools and guides for speedrunning the game Claw
  - Download this repository (Note: if you clone the repo, make a copy of the files and use those, to avoid having your splits data commited, or overwritten when you pull changes from the repo)
  - Recommended: Join [Claw Discord](https://discord.gg/2GCj9hj) (Ask here for help)
 
-### Hotkeys
-
-An [Autohotkey](https://www.autohotkey.com/docs/AutoHotkey.htm) file called `Claw speedrun hotkeys.ahk` is included in this repo, which adds some useful hotkeys while it is running:
-
- - CapsLock: `mpstopwatch` and `mpfps` to toggle ingame timer and FPS
- - 4: Maps onto the F1 help button to put this in a more helpful place
- - Numpad1: `mpfly` to make Claw fly
- - Numpad2: `mpkfa` to toggle god mode
- - Numpad3: `mpfreak` to add catnip
-
-Only the first two are allowed during an actual run, obviously, and the ingame timer must be visible, although Livesplit does the actual run timing. Your FPS must be 60 for speedrunning Claw.
-
-These hotkeys should be straightforward to customise by editing `Claw speedrun hotkeys.ahk` and using the [Autohotkey documentation](https://www.autohotkey.com/docs/AutoHotkey.htm). 
-
-If you prefer not to use this, you can try `In game timer toggle trainer` on [Speedrun.com](https://www.speedrun.com/claw/resources) instead. 
- 
-
 ### Start a Speedrun
 
 These are the steps to set up livesplit with an autosplitter for the route to speedrun:
