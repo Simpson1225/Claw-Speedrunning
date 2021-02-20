@@ -69,16 +69,12 @@ Numpad0::
 ^Numpad8::
     ExitApp
     Return
-    
+
 ; Hotkey to run script that performs loading storage etc. automatically
 #IfWinActive Claw
 ^Numpad9::
     PrepareGameForRuns()
     return
-
-
-
-
 
 class MainMenu {
     static SINGLE_PLAYER := "s"
