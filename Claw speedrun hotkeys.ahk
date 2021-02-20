@@ -5,11 +5,11 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 
 ; Global variables
 pressDelay = 70 ; How long to wait before Menu inputs
-smallLoadDelay = 400 ; How long to wait for menu page transitions
-levelLoadDelay = 12000 ; Wait for a level to load for the first time
+smallLoadDelay = 200 ; How long to wait for menu page transitions
+levelLoadDelay = 11000 ; Wait for a level to load for the first time
 levelQuitDelay = 2500 ; How long to wait after quitting a level before the main menu can be used
-bossWarpCheatDelay = 5500 ; How long to wait for mpskinner boss warp
-aquatisCutsceneDelay = 16000 ; How long to wait for Aquatis cutscene
+bossWarpCheatDelay = 5000 ; How long to wait for mpskinner boss warp
+aquatisCutsceneDelay = 15000 ; How long to wait for Aquatis cutscene
 
 ; Hotkey to reveal ingame timer and FPS
 #IfWinActive Claw
@@ -56,6 +56,87 @@ Numpad3::
     TriggerAquatisCutscene()
     return
 
+class MainMenu {
+    static SINGLE_PLAYER := "s"
+    static NEW_GAME := "n"
+    static REPLAY_MOVIES := "r"
+    static OPTIONS := "o"
+    static CREDITS := "c"
+    static HELP := "h"
+    static QUIT := "q"
+}
+
+class SinglePlayer {
+    static NEW_GAME := "n"
+    static LOAD_GAME := "l"
+    static LOAD_CUSTOM_LEVEL := "c"
+    static SAVE_GAME := "s"
+    static UPLOAD_SCORES := "u"
+    static BACK := "b"
+}
+
+class LevelMenu {
+    static LA_ROCA := "r"
+    static BATTLEMENTS := "a"
+    static FOOTPATH := "f"
+    static DARK_WOODS := "w"
+    static TOWNSHIP := "o"
+    static PUERTO_LOBOS := "l"
+    static DOCKS := "d"
+    static SHIPYARDS := "s"
+    static PIRATES_COVE := "p"
+    static CLIFFS := "c"
+    static CAVERNS := "v"
+    static UNDERSEA_CAVES := "u"
+    static TIGER_ISLAND := "i"
+    static TEMPLE := "t"
+    static BACK := "b"
+}
+
+class LoadMenu {
+    static START = "s"
+    static SAVE_POINT_1 = "1"
+    static SAVE_POINT_2 = "2"
+    static BACK := "b"
+}
+
+class Options {
+    static EDIT_PLAYERS = "e"
+    static CONTROLS = "c"
+    static DISPLAY = "i"
+    static AUDIO = "a"
+    static BACK = "b"
+}
+
+class Display { 
+    static DETAIL = "d"
+    static FRONT_LAYER = "f"
+    static GAME_PLAY_AREA = "g"
+    static MOVIES = "m"
+    static BACK = "b"
+}
+
+class Audio {
+    static SOUND = "s"
+    static VOICE = "v"
+    static AMBIENT = "a"
+    static MUSIC = "m"
+    static BACK = "b"
+}
+
+class GameMenu {
+    static RESUME_GAME = "r"
+    static END_LIFE = "l"
+    static OPTIONS = "o"
+    static HELP = "h"
+    static END_GAME = "e"
+}
+
+class EndGameMenu {
+    static YES = "y"
+    static NO = "n"
+}
+
 InitialiseForSpeedrun() {
     Send, mpfps
     Send, mpstopwatch
@@ -67,40 +148,21 @@ PrepareGameForRuns() {
 }
 
 ; Disables the front layer in the options page.
-; Start on 'Single Player' option of main menu
-; Finishes on 'Single Player' option of main menu
+; Start on main menu page
 DisableFrontLayer() {
     global pressDelay
     global smallLoadDelay
 
-    ; Move Down to options
-    Loop, 2 {
-        MenuDown()
-    }
-
-    MenuSelectOption() ; Choose options
-
-    ; Move to Display
-    Loop, 2 {
-        MenuDown()
-    }
-
-    MenuSelectOption() ; Choose Display
-    MenuDown() ; Move to Front Layer
-    MenuSelectOption() ; Disable front layer
-
+    PressMenuHotkey(MainMenu.OPTIONS)
+    PressMenuHotkey(Options.DISPLAY)
+    PressMenuHotkey(Display.FRONT_LAYER)
+   
     ; Return to main menu
-    Loop, 2 {
-        MenuBackOrOpen()
-    }
-
-    ; Move up to 'Single Player'
-    Loop, 2 {
-        MenuUp()
-    }
+    MenuBackOrOpen()
+    MenuBackOrOpen()
 }
 
-; Start from main menu of Claw with 'Single Player' selected
+; Start from main menu
 LoadingStorage() {
     Loop, 11 {
         loadingStorageForLevel(A_Index)
@@ -112,49 +174,78 @@ LoadingStorage() {
 }
 
 ; Loads the start of a level, and then quits to main menu
-; Starts and finishes on 'Single Player' option of main menu
+; Starts and finishes on main menu
 ; The current player needs to have reached the level so that it is loadable
 loadingStorageForLevel(targetLevel) {
     global levelLoadDelay
     global levelQuitDelay
 
-    LoadLevel(targetLevel)
+    StartNewLevel(targetLevel)
     Sleep, levelLoadDelay
     QuitToMainMenu()
     Sleep, levelQuitDelay
 }
 
-; Starts on 'Single Player' option of main menu
+; Starts on main menu
 ; The current player needs to have reached the level so that it is loadable
 LoadLevel(targetLevel) {
-    global pressDelay
-    global smallLoadDelay
-
-    MenuSelectOption() ; Choose single player
-    MenuDown() ; Move to Load Game
-    MenuSelectOption() ; Choose new game
-    NavigateToLevelInMenu(targetLevel)
-    MenuSelectOption() ; Choose selected level
-    MenuSelectOption() ; Load from start
+    PressMenuHotkey(MainMenu.SINGLE_PLAYER)
+    PressMenuHotkey(SinglePlayer.LOAD_GAME) 
+    PressMenuHotkey(GetLevelHotkeyByLevelNumber(targetLevel))
+    MenuSelectOption() ; hotkey for start doesn't seem to work 
 }
 
-; Starts on the Level menu, with La Roca selected
-; Uses arrow keys to move to the target level option
-NavigateToLevelInMenu(targetLevel) {
-    ; Move to correct column and calculate number of downward steps to take
-    if (targetLevel >= 8) {
-        MenuRight()
+StartNewLevel(targetLevel) {
+    PressMenuHotkey(MainMenu.SINGLE_PLAYER)
+    PressMenuHotkey(SinglePlayer.NEW_GAME) 
+    PressMenuHotkey(GetLevelHotkeyByLevelNumber(targetLevel))
+}
 
-        downMovements := targetLevel - 8
-    } else {
-        downMovements := targetLevel - 1
+GetLevelHotkeyByLevelNumber(levelNumber) {
+    if (levelNumber = 1) {
+        return LevelMenu.LA_ROCA
     }
-
-    ; Perform downward steps
-    i := 0
-    while (i < downMovements) {
-        MenuDown()
-        i := i + 1
+    else if (levelNumber = 2) { 
+        return LevelMenu.BATTLEMENTS
+    }
+    else if (levelNumber = 3) { 
+        return LevelMenu.FOOTPATH
+    }
+    else if (levelNumber = 4) { 
+        return LevelMenu.DARK_WOODS
+    }
+    else if (levelNumber = 5) {
+        return LevelMenu.TOWNSHIP
+    }
+    else if (levelNumber = 6) {
+        return LevelMenu.PUERTO_LOBOS
+    }
+    else if (levelNumber = 7) {
+        return LevelMenu.DOCKS
+    }
+    else if (levelNumber = 8) {
+        return LevelMenu.SHIPYARDS
+    }
+    else if (levelNumber = 9) {
+        return LevelMenu.PIRATES_COVE
+    }
+    else if (levelNumber = 10) {
+        return LevelMenu.CLIFFS
+    }
+    else if (levelNumber = 11) {
+        return LevelMenu.CAVERNS
+    }
+    else if (levelNumber = 12) {
+        return LevelMenu.UNDERSEA_CAVES
+    }
+    else if (levelNumber = 13) {
+        return LevelMenu.TIGER_ISLAND
+    }
+    else if (levelNumber = 14) {
+        return LevelMenu.TEMPLE
+    }
+    else {
+        return ""
     }
 }
 
@@ -163,12 +254,11 @@ QuitToMainMenu() {
     global smallLoadDelay
 
     MenuBackOrOpen() ; Open menu
-    MenuUp() ; Move to End Game option
-    MenuSelectOption() ; Hit end game
-    MenuSelectOption() ; Confirm end game
+    PressMenuHotkey(GameMenu.END_GAME)
+    PressMenuHotkey(EndGameMenu.YES)
 }
 
-; Start from 'Single Player' on the main menu
+; Start from main menu
 TriggerAquatisCutscene() {
     global levelLoadDelay
     global levelQuitDelay
@@ -192,6 +282,16 @@ TriggerAquatisCutscene() {
     Sleep, levelQuitDelay
 }
 
+PressMenuHotkey(menuHotkey) {
+    global pressDelay
+    global smallLoadDelay
+
+    Send, {%menuHotkey% down}
+    Sleep, pressDelay
+    Send, {%menuHotkey% up}
+    Sleep, smallLoadDelay
+}
+
 ; Presses enter to select an option from the menu
 MenuSelectOption() {
     global pressDelay
@@ -211,38 +311,5 @@ MenuBackOrOpen() {
     Send, {Esc down}
     Sleep, pressDelay
     Send, {Esc up}
-    Sleep, pressDelay
-}
-
-; Presses Up to move up a menu option
-MenuUp() {
-    global pressDelay
-    global smallLoadDelay
-
-    Send, {Up down}
-    Sleep, pressDelay
-    Send, {Up up}
-    Sleep, pressDelay
-}
-
-; Presses Down to move up a menu option
-MenuDown() {
-    global pressDelay
-    global smallLoadDelay
-
-    Send, {Down down}
-    Sleep, pressDelay
-    Send, {Down up}
-    Sleep, pressDelay
-}
-
-; Presses Right to move up a menu option
-MenuRight() {
-    global pressDelay
-    global smallLoadDelay
-
-    Send, {Right down}
-    Sleep, pressDelay
-    Send, {Right up}
-    Sleep, pressDelay
+    Sleep, smallLoadDelay
 }
