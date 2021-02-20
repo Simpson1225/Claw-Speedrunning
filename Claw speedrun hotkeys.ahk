@@ -21,40 +21,64 @@ CapsLock::
 #IfWinActive Claw
 4::F1
 
+#IfWinActive Claw
+Numpad0::
+    Send, mpartur
+    return
+
 ; Hotkey to toggle flying
 #IfWinActive Claw
-Numpad1::
+^Numpad1::
     Send, mpfly
     return
 
 ; Hotkey to toggle god mode
 #IfWinActive Claw
-Numpad2::
+^Numpad2::
     Send, mpkfa
     return
 
 ; Hotkey to add catnip
 #IfWinActive Claw
-Numpad3::
+^Numpad3::
     Send, mpfreak
     return
 
-; Hotkey to run script that performs loading storage etc. automatically
 #IfWinActive Claw
-^Numpad9::
-    PrepareGameForRuns()
+^Numpad4::
+    Send, mpvader
     return
 
-; Hotkey to quit this .ahk script if the loading storage script goes wrong
-^Numpad8::
-    ExitApp
-    Return
+#IfWinActive Claw
+^Numpad5::
+    Send, mparmor
+    return
+
+#IfWinActive Claw
+^Numpad6::
+    Send, mpskinner
+    return
 
 ; Hotkey to load level 12 and then trigger the Aquatis cutscene automatically
 #IfWinActive Claw
 ^Numpad7::
     TriggerAquatisCutscene()
     return
+
+; Hotkey to quit this .ahk script if the loading storage script goes wrong
+^Numpad8::
+    ExitApp
+    Return
+    
+; Hotkey to run script that performs loading storage etc. automatically
+#IfWinActive Claw
+^Numpad9::
+    PrepareGameForRuns()
+    return
+
+
+
+
 
 class MainMenu {
     static SINGLE_PLAYER := "s"
