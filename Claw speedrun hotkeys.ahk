@@ -22,7 +22,7 @@ CapsLock::
 4::F1
 
 #IfWinActive Claw
-Numpad0::
+^Numpad0::
     Send, mpartur
     return
 
@@ -56,24 +56,45 @@ Numpad0::
 
 #IfWinActive Claw
 ^Numpad6::
+    Send, mpfranklin
+    return
+
+#IfWinActive Claw
+^Numpad7::
+    Send, mphotstuff
+    return
+
+#IfWinActive Claw
+^Numpad8::
+    Send, mppenguin
+    return
+
+#IfWinActive Claw
+^Numpad9::
     Send, mpskinner
     return
 
 ; Hotkey to load level 12 and then trigger the Aquatis cutscene automatically
 #IfWinActive Claw
-^Numpad7::
+!Numpad6::
+    DisableFrontLayer()
+    return
+
+; Hotkey to load level 12 and then trigger the Aquatis cutscene automatically
+#IfWinActive Claw
+!Numpad7::
     TriggerAquatisCutscene()
     return
 
 ; Hotkey to quit this .ahk script if the loading storage script goes wrong
-^Numpad8::
+!Numpad8::
     ExitApp
     Return
 
 ; Hotkey to run script that performs loading storage etc. automatically
 #IfWinActive Claw
-^Numpad9::
-    PrepareGameForRuns()
+!Numpad9::
+    LoadingStorage()
     return
 
 class MainMenu {
@@ -160,11 +181,6 @@ class EndGameMenu {
 InitialiseForSpeedrun() {
     Send, mpfps
     Send, mpstopwatch
-}
-
-PrepareGameForRuns() {
-    DisableFrontLayer()
-    LoadingStorage()
 }
 
 ; Disables the front layer in the options page.
