@@ -128,7 +128,6 @@ split {
 	// Score: 418600 (Before any treasure or enemies around the flag)
 	if (
 		vars.split < 6
-		
 		&& current.xPos >= 14550 // Right of this
 		&& current.yPos >= 1100 // Below this
 		&& current.yPos <= 1400 // Above this
@@ -206,7 +205,7 @@ split {
 		vars.split < 12
 		&& current.xPos >= 3350 // Right of this
 		&& current.xPos <= 3500 // Left of this
-		&& current.yPos >= 13x00 // Below this
+		&& current.yPos >= 1300 // Below this
 		&& current.yPos <= 1423 // Above this
 	) {
 		vars.split = 12;
